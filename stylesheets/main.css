@@ -12,26 +12,3 @@ canvas {
   position: relative;
   margin: 30px auto;
 }
-
-header {
-  height: 60px;
-  padding: 40px 70px;
-  font-size: 20px;
-  color: red;
-  position: absolute;
-  width: 100%;
-}
-
-header article {
-  float: left;
-  width: 200px;
-}
-
-header article span {
-  color: #fff;
-}
-
-header article.lives {
-  float: right;
-  color: #fff;
-}
