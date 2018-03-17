@@ -22,8 +22,8 @@ describe('Platform', function () {
 
   it('should draw a platform when instantiated', () => {
     assert.equal(platform.platforms[0].x, 60);
-    assert.equal(platform.platforms[0].y, 580);
-    assert.equal(platform.platforms[0].w, 870);
+    assert.equal(platform.platforms[0].y, 120);
+    assert.equal(platform.platforms[0].w, 880);
     assert.equal(platform.platforms[0].h, 10);
   })
 });
