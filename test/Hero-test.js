@@ -16,10 +16,11 @@ describe ('Hero', () => {
     assert.isObject(hero);
   })
 
-  it('should draw a hero when instantiated', () => {
+  it('should have a starting x coordinate of 475', () => {
     assert.equal(hero.x, 475);
+  })
+
+  it('should have a starting y coordinate of 525', () => {
     assert.equal(hero.y, 525);
-    assert.equal(hero.w, 40);
-    assert.equal(hero.h, 55);
   })
 })

@@ -12,7 +12,7 @@ describe('Game', () => {
     assert.equal(true, true);
   })
 
-  it('is a class', function () {
+  it('Game class should be a function', function () {
     assert.isFunction(Game);
   })
 
