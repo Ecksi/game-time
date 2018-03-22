@@ -12,3 +12,52 @@ canvas {
   position: relative;
   margin: 30px auto;
 }
+
+#instructions {
+    display: block;
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 60px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: #243d99; 
+}
+
+#instructions-content {
+    background-image: url(../resources/modal_bg_pattern.png);
+    background-repeat: repeat;
+    margin: auto;
+    padding: 40px;
+    border-radius: 10px;
+    border: 5px solid #888;
+    width: 80%;
+    top: 200px;
+    text-align: center;
+    font-size: 28px;
+    color: #c22b30;
+}
+
+#instructions span {
+  font-size: 22px;
+  font-weight: bold;
+  color: #2b2774;
+}
+
+#instructions button {
+  background: #f9ad19;
+  border: 4px solid #fff;
+  border-radius: 3px;
+  padding: 20px 40px;
+  margin: 40px auto 20px auto;
+  font-size: 18px;
+  color: #fff;
+}
+
+#instructions button:hover {
+  cursor: pointer;
+  background: #ef8a22;
+}
+
