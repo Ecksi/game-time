@@ -17,7 +17,7 @@ describe('Game', () => {
   })
 
   it('should start with a timer set at 31', () => {
-    assert.equal(game.timer, 31)
+    assert.equal(game.timer, 51)
   })
 
   it('should start with a gameNumber of 1', () => {
