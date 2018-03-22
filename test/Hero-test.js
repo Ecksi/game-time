@@ -4,7 +4,7 @@ const Hero = require('../lib/Hero.js')
 describe ('Hero', () => {
   let hero;
 
-  beforeEach(function () {
+  beforeEach(() => {
     hero = new Hero();
   })
 
@@ -22,5 +22,17 @@ describe ('Hero', () => {
 
   it('should have a starting y coordinate of 525', () => {
     assert.equal(hero.y, 525);
+  })
+
+  it('should start with a score of 0', () => {
+    assert.equal(hero.score, 0)
+  })
+
+  it('should have onLadder set to false by default', () => {
+    assert.equal(hero.onLadder, false)
+  })
+
+  it('should have onPlatform set to false by default', () => {
+    assert.equal(hero.onPlatform, false)
   })
 })
