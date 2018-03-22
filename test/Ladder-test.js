@@ -1,15 +1,11 @@
 const { assert } = require('chai');
 const Ladder = require('../lib/Ladder.js')
 
-describe('Ladder', function () {
+describe('Ladder', () => {
   let ladder;
 
-  beforeEach(function () {
+  beforeEach(() => {
     ladder = new Ladder();
-  })
-
-  it('should exist', () => {
-    assert.equal(true, true);
   })
 
   it('Ladder class should be a function', () => {
@@ -26,4 +22,8 @@ describe('Ladder', function () {
     assert.equal(ladder.ladders[0].w, 30);
     assert.equal(ladder.ladders[0].h, 90);
   })
-});
+
+  it('should start the game with 30 ladders', () => {
+    assert.equal(ladder.ladders.length, 30);
+  })
+})
