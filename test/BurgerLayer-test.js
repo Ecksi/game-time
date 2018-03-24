@@ -23,7 +23,7 @@ describe('Burger', () => {
   })
 
   it('should have the same x coord as the x argument', () => {
-    assert.equal(burger1.x, 55)
+    assert.equal(burger1.x, 55);
   })
 
   it('should have a width of 125px', () => {
@@ -35,30 +35,30 @@ describe('Burger', () => {
   })
 
   it('should start with a smushLeft count of 0', () => {
-    assert.equal(burger2.smushLeft, 0)
+    assert.equal(burger2.smushLeft, 0);
   })
 
   it('should start with a smushRight count of 0', () => {
-    assert.equal(burger3.smushRight, 0)
+    assert.equal(burger3.smushRight, 0);
   })
 
   it('should start with a smushCount count of 0', () => {
-    assert.equal(burger4.smushCount, 0)
+    assert.equal(burger4.smushCount, 0);
   })
 
   it('should be able to have a  type of top', () => {
-    assert.equal(burger1.layer, 'top')
+    assert.equal(burger1.layer, 'top');
   })
 
   it('should be able to have a  type of lettuce', () => {
-    assert.equal(burger2.layer, 'lettuce')
+    assert.equal(burger2.layer, 'lettuce');
   })
 
   it('should be able to have a  type of patty', () => {
-    assert.equal(burger3.layer, 'patty')
+    assert.equal(burger3.layer, 'patty');
   })
 
   it('should be able to have a  type of bottom', () => {
-    assert.equal(burger4.layer, 'bottom')
+    assert.equal(burger4.layer, 'bottom');
   })
 });
