@@ -2,10 +2,16 @@ const { assert } = require('chai');
 const Plate = require('../lib/Plate.js')
 
 describe('Plate', () => {
-  let plate;
+  let plate1;
+  let plate2;
+  let plate3;
+  let plate4;
 
   beforeEach(() => {
-    plate = new Plate();
+    plate1 = new Plate(123);
+    plate2 = new Plate(456);
+    plate3 = new Plate(789);
+    plate4 = new Plate(675);
   })
 
   it('Plate class should be a function', () => {
@@ -13,33 +19,26 @@ describe('Plate', () => {
   })
 
   it('a new plate should be an object', () => {
-    assert.isObject(plate);
+    assert.isObject(plate1);
   })
 
-  it('should draw a plate when instantiated', () => {
-    assert.equal(plate.plates[0].x, 120);
-    assert.equal(plate.plates[0].y, 675);
-    assert.equal(plate.plates[0].w, 135);
-    assert.equal(plate.plates[0].h, 5);
-  })
-
-  it('should draw 4 plates', () => {
-    assert.equal(plate.plates.length, 4);
-  })
-
-  it('should have a default height of 5', () => {
-    assert.equal(plate.plates[1].h, 5)
-  })
-
-  it('should have a default width of 135', () => {
-    assert.equal(plate.plates[2].w, 135)
+  it('should have the same x coord as the x argument', () => {
+    assert.equal(plate4.x, 675);
   })
 
   it('should have a default y position of 675', () => {
-    assert.equal(plate.plates[3].y, 675)
+    assert.equal(plate1.y, 675)
+  })
+
+  it('should have a default width of 135', () => {
+    assert.equal(plate3.w, 135)
+  })
+
+  it('should have a default height of 5', () => {
+    assert.equal(plate2.h, 5)
   })
 
   it('should start with a plate count of 0', () => {
-    assert.equal(plate.plateCount, 0)
+    assert.equal(plate3.plateCount, 0)
   })
 });
