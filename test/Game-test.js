@@ -16,35 +16,39 @@ describe('Game', () => {
     assert.isObject(game);
   })
 
+  it('should start with a score of 0', () => {
+    assert.equal(game.score, 0);
+  })
+
   it('should start with a timer set at 31', () => {
-    assert.equal(game.timer, 51)
+    assert.equal(game.timer, 51);
   })
 
   it('should start with a gameNumber of 1', () => {
-    assert.equal(game.gameNumber, 1)
+    assert.equal(game.gameNumber, 1);
   })
 
   it('should be able to create a new hero object', () => {
-    assert.equal(typeof game.hero, 'object')
+    assert.equal(typeof game.hero, 'object');
   })
 
   it('should be able to create a new ladder object', () => {
-    assert.equal(typeof game.ladder, 'object')
+    assert.equal(typeof game.ladder, 'object');
   })
 
   it('should be able to create a new platform object', () => {
-    assert.equal(typeof game.platform, 'object')
+    assert.equal(typeof game.platform, 'object');
   })
 
   it('should be able to create a new burgerLayer object', () => {
-    assert.equal(typeof game.burgerLayers, 'object')
+    assert.equal(typeof game.burgerLayers, 'object');
   })
 
   it('should be able to create a new plate object', () => {
-    assert.equal(typeof game.plates, 'object')
+    assert.equal(typeof game.plates, 'object');
   })
 
   it('should be able to create a new text object', () => {
-    assert.equal(typeof game.text, 'object')
+    assert.equal(typeof game.text, 'object');
   })
 })
