@@ -28,11 +28,11 @@ describe('Ladder', () => {
     assert.equal(ladder3.y, 540);
   })
   
-  it('should have the same h coord as the h argument', () => {
+  it('should have the same height coord as the h argument', () => {
     assert.equal(ladder1.h, 300);
   })
 
-  it('should have a width of 30', () => {
+  it('should have a default width of 30', () => {
     assert.equal(ladder3.w, 30);
   })
 })
