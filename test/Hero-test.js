@@ -1,11 +1,11 @@
 const { assert } = require('chai');
-const Hero = require('../lib/Hero.js')
+const Hero = require('../lib/Hero.js');
 
 describe ('Hero', () => {
   let hero;
 
   beforeEach(() => {
-    hero = new Hero();
+    hero = new Hero(475, 525);
   })
 
   it('Hero class should be a function', () => {
@@ -22,10 +22,6 @@ describe ('Hero', () => {
 
   it('should have a starting y coordinate of 525', () => {
     assert.equal(hero.y, 525);
-  })
-
-  it('should start with a score of 0', () => {
-    assert.equal(hero.score, 0)
   })
 
   it('should have onLadder set to false by default', () => {

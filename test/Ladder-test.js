@@ -2,10 +2,14 @@ const { assert } = require('chai');
 const Ladder = require('../lib/Ladder.js')
 
 describe('Ladder', () => {
-  let ladder;
+  let ladder1;
+  let ladder2;
+  let ladder3;
 
   beforeEach(() => {
-    ladder = new Ladder();
+    ladder1 = new Ladder(65, 420, 300);
+    ladder2 = new Ladder(130, 230, 330);
+    ladder3 = new Ladder(200, 540, 210);
   })
 
   it('Ladder class should be a function', () => {
@@ -13,17 +17,22 @@ describe('Ladder', () => {
   })
 
   it('a new ladder should be an object', () => {
-    assert.isObject(ladder);
+    assert.isObject(ladder1);
   })
 
-  it('should draw a ladder when instantiated', () => {
-    assert.equal(ladder.ladders[0].x, 65);
-    assert.equal(ladder.ladders[0].y, 490);
-    assert.equal(ladder.ladders[0].w, 30);
-    assert.equal(ladder.ladders[0].h, 90);
+  it('should have the same x coord as the x argument', () => {
+    assert.equal(ladder2.x, 130);
   })
 
-  it('should start the game with 30 ladders', () => {
-    assert.equal(ladder.ladders.length, 30);
+  it('should have the same y coord as the y argument', () => {
+    assert.equal(ladder3.y, 540);
+  })
+  
+  it('should have the same height coord as the h argument', () => {
+    assert.equal(ladder1.h, 300);
+  })
+
+  it('should have a default width of 30', () => {
+    assert.equal(ladder3.w, 30);
   })
 })
