@@ -1,5 +1,5 @@
 const { assert } = require('chai');
-const Keyboarder = require('../lib/Keyboarder.js');
+const Keyboarder = require('../lib/Keyboarder');
 
 describe('Keyboarder', () => {
   let keyboarder;

@@ -1,5 +1,5 @@
 const { assert } = require('chai');
-const Platform = require('../lib/Platform.js')
+const Platform = require('../lib/Platform')
 
 describe('Platform', () => {
   let platform1;

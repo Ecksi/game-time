@@ -1,5 +1,5 @@
 const { assert } = require('chai');
-const Burger = require('../lib/BurgerLayer.js')
+const Burger = require('../lib/BurgerLayer')
 
 describe('Burger', () => {
   let burger1;
