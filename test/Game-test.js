@@ -154,4 +154,31 @@ describe('Game', () => {
 
     assert.equal(game.findCurrentBurger().length, 1)
   });
+
+  it('should be able reset smush properties', () => {
+    game = new Game(undefined, undefined, keyboarder);
+
+    game.hero.x = 600;
+    game.hero.y = 150;
+
+    let currentBurger = game.findCurrentBurger();
+
+    assert.equal(currentBurger[0].smushLeft, false);
+    assert.equal(currentBurger[0].smushRight, false);
+    assert.equal(currentBurger[0].smushCount, 0);
+
+    currentBurger[0].smushLeft = true;
+    currentBurger[0].smushRight = true;
+    currentBurger[0].smushCount = 2;
+
+    assert.equal(currentBurger[0].smushLeft, true);
+    assert.equal(currentBurger[0].smushRight, true);
+    assert.equal(currentBurger[0].smushCount, 2);
+
+    game.resetSmushCounts(currentBurger[0]);
+
+    assert.equal(currentBurger[0].smushLeft, false);
+    assert.equal(currentBurger[0].smushRight, false);
+    assert.equal(currentBurger[0].smushCount, 0);
+  });
 })
