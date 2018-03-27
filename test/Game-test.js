@@ -1,13 +1,22 @@
 const { assert } = require('chai');
-const Game = require('../lib/Game.js');
-
-require('locus');
+const Game = require('../lib/Game');
 
 describe('Game', () => {
   let game;
+  let keyboarder;
+  let originalHeroXPosition;
+  let originalHeroYPosition;
 
   beforeEach(() => {
     game = new Game();
+    originalHeroXPosition = game.hero.x;
+    originalHeroYPosition = game.hero.y;
+    keyboarder = {
+      key: {
+      },
+      keyState: {
+      }
+    }
   });
 
   it('Game class should be a function', () => {
@@ -64,36 +73,47 @@ describe('Game', () => {
     assert.equal(typeof game.text, 'object');
   })
 
-  it('should be able to create the burgers for Level 1', () => {
-    assert.equal(game.burgerLayers[2].x, 535);
-    assert.equal(game.burgerLayers[2].y, 110);
-    assert.equal(game.burgerLayers[3].w, 125);
-    assert.equal(game.burgerLayers[4].h, 15);
-    assert.equal(game.burgerLayers[1].layer, 'top');
-    assert.equal(game.burgerLayers.length, 16);
+  it('it should be able to the move to the right', () => {
+    game = new Game(undefined, undefined, keyboarder);
+    keyboarder.key.right = true;
+    keyboarder.keyState.right = 'enabled';
+
+    assert.equal(game.hero.x, originalHeroXPosition)
+    game.moveHero();
+
+    assert.equal(game.hero.x, originalHeroXPosition + 2.5)
   })
 
-  it('should be able to create the ladders for Level 1', () => {
-    assert.equal(game.ladders[1].x, 65);
-    assert.equal(game.ladders[3].y, 325);
-    assert.equal(game.ladders[3].w, 30);
-    assert.equal(game.ladders[4].h, 100);
-    assert.equal(game.ladders.length, 31);
+  it('it should be able to the move to the left', () => {
+    game = new Game(undefined, undefined, keyboarder);
+    keyboarder.key.left = true;
+    keyboarder.keyState.left = 'enabled';
+
+    assert.equal(game.hero.x, originalHeroXPosition)
+    game.moveHero();
+
+    assert.equal(game.hero.x, originalHeroXPosition - 2.5)
   })
 
-  it('should be able to create the platforms for Level 1', () => {
-    assert.equal(game.platforms[6].x, 265);
-    assert.equal(game.platforms[4].y, 315);
-    assert.equal(game.platforms[2].w, 490);
-    assert.equal(game.platforms[8].h, 10);
-    assert.equal(game.platforms.length, 10);
+  it('it should be able to the move to the down', () => {
+    game = new Game(undefined, undefined, keyboarder);
+    keyboarder.key.down = true;
+    keyboarder.keyState.down = 'enabled';
+
+    assert.equal(game.hero.y, originalHeroYPosition)
+    game.moveHero();
+
+    assert.equal(game.hero.y, originalHeroYPosition + 2.5)
   })
 
-  it('should be able to create the plates for Level 1', () => {
-    assert.equal(game.platesOnBottom[1].x, 330);
-    assert.equal(game.platesOnBottom[3].y, 675);
-    assert.equal(game.platesOnBottom[2].w, 135);
-    assert.equal(game.platesOnBottom[0].h, 5);
-    assert.equal(game.platesOnBottom.length, 4);
+  it('it should be able to the move to the up', () => {
+    game = new Game(undefined, undefined, keyboarder);
+    keyboarder.key.up = true;
+    keyboarder.keyState.up = 'enabled';
+
+    assert.equal(game.hero.y, originalHeroYPosition)
+    game.moveHero();
+
+    assert.equal(game.hero.y, originalHeroYPosition - 2.5)
   })
 })

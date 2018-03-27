@@ -1,5 +1,5 @@
 const { assert } = require('chai');
-const Hero = require('../lib/Hero.js');
+const Hero = require('../lib/Hero');
 
 describe ('Hero', () => {
   let hero;

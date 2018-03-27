@@ -1,5 +1,5 @@
 const { assert } = require('chai');
-const Ladder = require('../lib/Ladder.js')
+const Ladder = require('../lib/Ladder')
 
 describe('Ladder', () => {
   let ladder1;

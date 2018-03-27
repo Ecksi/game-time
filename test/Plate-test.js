@@ -1,5 +1,5 @@
 const { assert } = require('chai');
-const Plate = require('../lib/Plate.js')
+const Plate = require('../lib/Plate')
 
 describe('Plate', () => {
   let plate1;
