@@ -3,9 +3,20 @@ const Game = require('../lib/Game');
 
 describe('Game', () => {
   let game;
+  let keyboarder;
+  let originalHeroXPosition;
+  let originalHeroYPosition;
 
   beforeEach(() => {
     game = new Game();
+    originalHeroXPosition = game.hero.x;
+    originalHeroYPosition = game.hero.y;
+    keyboarder = {
+      key: {
+      },
+      keyState: {
+      }
+    }
   });
 
   it('Game class should be a function', () => {
@@ -60,5 +71,49 @@ describe('Game', () => {
 
   it('should be able to create a new text object', () => {
     assert.equal(typeof game.text, 'object');
+  })
+
+  it('it should be able to the move to the right', () => {
+    game = new Game(undefined, undefined, keyboarder);
+    keyboarder.key.right = true;
+    keyboarder.keyState.right = 'enabled';
+
+    assert.equal(game.hero.x, originalHeroXPosition)
+    game.moveHero();
+
+    assert.equal(game.hero.x, originalHeroXPosition + 2.5)
+  })
+
+  it('it should be able to the move to the left', () => {
+    game = new Game(undefined, undefined, keyboarder);
+    keyboarder.key.left = true;
+    keyboarder.keyState.left = 'enabled';
+
+    assert.equal(game.hero.x, originalHeroXPosition)
+    game.moveHero();
+
+    assert.equal(game.hero.x, originalHeroXPosition - 2.5)
+  })
+
+  it('it should be able to the move to the down', () => {
+    game = new Game(undefined, undefined, keyboarder);
+    keyboarder.key.down = true;
+    keyboarder.keyState.down = 'enabled';
+
+    assert.equal(game.hero.y, originalHeroYPosition)
+    game.moveHero();
+
+    assert.equal(game.hero.y, originalHeroYPosition + 2.5)
+  })
+
+  it('it should be able to the move to the up', () => {
+    game = new Game(undefined, undefined, keyboarder);
+    keyboarder.key.up = true;
+    keyboarder.keyState.up = 'enabled';
+
+    assert.equal(game.hero.y, originalHeroYPosition)
+    game.moveHero();
+
+    assert.equal(game.hero.y, originalHeroYPosition - 2.5)
   })
 })
