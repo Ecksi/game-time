@@ -1,5 +1,8 @@
 const { assert } = require('chai');
 const Game = require('../lib/Game');
+const Platform = require('../lib/Platform');
+
+require('locus');
 
 describe('Game', () => {
   let game;
@@ -73,7 +76,7 @@ describe('Game', () => {
     assert.equal(typeof game.text, 'object');
   })
 
-  it('it should be able to the move to the right', () => {
+  it('should be able to the move to the right', () => {
     game = new Game(undefined, undefined, keyboarder);
     keyboarder.key.right = true;
     keyboarder.keyState.right = 'enabled';
@@ -84,7 +87,7 @@ describe('Game', () => {
     assert.equal(game.hero.x, originalHeroXPosition + 2.5)
   })
 
-  it('it should be able to the move to the left', () => {
+  it('should be able to the move to the left', () => {
     game = new Game(undefined, undefined, keyboarder);
     keyboarder.key.left = true;
     keyboarder.keyState.left = 'enabled';
@@ -95,7 +98,7 @@ describe('Game', () => {
     assert.equal(game.hero.x, originalHeroXPosition - 2.5)
   })
 
-  it('it should be able to the move to the down', () => {
+  it('should be able to the move to the down', () => {
     game = new Game(undefined, undefined, keyboarder);
     keyboarder.key.down = true;
     keyboarder.keyState.down = 'enabled';
@@ -106,14 +109,41 @@ describe('Game', () => {
     assert.equal(game.hero.y, originalHeroYPosition + 2.5)
   })
 
-  it('it should be able to the move to the up', () => {
+  it('should be able to the move to the up', () => {
     game = new Game(undefined, undefined, keyboarder);
     keyboarder.key.up = true;
     keyboarder.keyState.up = 'enabled';
 
-    assert.equal(game.hero.y, originalHeroYPosition)
+    assert.equal(game.hero.y, originalHeroYPosition);
     game.moveHero();
 
     assert.equal(game.hero.y, originalHeroYPosition - 2.5)
+  })
+
+  it('should be able to tell if the hero is on a platform', () => {
+    assert.equal(game.hero.onPlatform, false);
+
+    game.platformCollision();
+
+    assert.equal(game.hero.onPlatform, true);
+  })
+
+  it('should be able to tell if the hero is on a ladder', () => {
+    game = new Game(undefined, undefined, keyboarder);
+    keyboarder.key.left = true;
+    keyboarder.keyState.left = 'enabled';
+
+    assert.equal(game.hero.onLadder, false);
+
+    game.ladderCollision();
+
+    assert.equal(game.hero.onLadder, true);
+
+    game.moveHero();
+    game.moveHero();
+    game.moveHero();
+    game.ladderCollision();
+
+    assert.equal(game.hero.onLadder, false);
   })
 })
