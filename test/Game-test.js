@@ -119,6 +119,14 @@ describe('Game', () => {
     assert.equal(game.hero.y, originalHeroYPosition - 2.5)
   });
 
+  it('should be able to tell what burger the hero is on', () => {
+    game.hero.x = 600;
+    game.hero.y = 150;
+
+    assert.equal(game.findCurrentBurger()[0].x, 535)
+    assert.equal(game.findCurrentBurger()[0].y, 195)
+  });
+
   it('should be able to tell if the hero is on a platform', () => {
     assert.equal(game.hero.onPlatform, false);
 
@@ -146,22 +154,80 @@ describe('Game', () => {
     assert.equal(game.hero.onLadder, false);
   });
 
-  it('should be able to tell what burger the hero is on', () => {
-    game = new Game(undefined, undefined, keyboarder);
-    
-    game.hero.x = 600;
+  it('should set currentBurger.smushLeft to true when the hero is on the right side of the burger', () => {
+    game.hero.x = 535;
     game.hero.y = 150;
 
-    assert.equal(game.findCurrentBurger().length, 1)
+    let currentBurger = game.findCurrentBurger()[0];
+
+    assert.equal(currentBurger.smushLeft, false);
+    game.squishLeft(currentBurger);
+
+    assert.equal(currentBurger.smushLeft, true);
+  });
+
+  it('should set currentBurger.smushRight to true when the hero is on the right side of the burger', () => {
+    game.hero.x = 620;
+    game.hero.y = 150;
+
+    let currentBurger = game.findCurrentBurger()[0];
+
+    assert.equal(currentBurger.smushRight, false);
+    game.squishRight(currentBurger);
+
+    assert.equal(currentBurger.smushRight, true);
+  });
+
+  it('should be able to find the next platform', () => {
+    game.hero.x = 355;
+    game.hero.y = 65;
+
+    let currentPlatform = game.platformCollision();
+    let currentBurger = game.findCurrentBurger()[0];
+
+    assert(currentBurger.y, 110)
+
+    currentBurger.smushCount = 2;
+
+    game.burgerCollision();
+
+    assert(currentBurger.y, 250)
+  });
+
+  it('should be able to drop the burger to the next level if not on platform 8', () => {
+    game.hero.x = 355;
+    game.hero.y = 65;
+
+    let currentPlatform = game.platformCollision();
+    let currentBurger = game.findCurrentBurger()[0];
+
+
+  });
+
+  it('should be able to drop the burger to the plate if on platform 8', () => {
+    game.hero.x = 750;
+    game.hero.y = 370;
+
+    let currentBurger = game.findCurrentBurger()[0];
+
+    assert.equal(currentBurger.y, 415)
+    
+    currentBurger.smushLeft = true;
+    currentBurger.smushRight = true;
+    currentBurger.smushCount = 2;
+
+    game.dropBurgerToPlate(currentBurger);
+    
+    assert.equal(currentBurger.y, 665)
   });
 
   it('should be able reset smush properties', () => {
-    game = new Game(undefined, undefined, keyboarder);
-
     game.hero.x = 600;
     game.hero.y = 150;
 
     let currentBurger = game.findCurrentBurger()[0];
+
+    game.resetSmushCounts(currentBurger)
 
     assert.equal(currentBurger.smushLeft, false);
     assert.equal(currentBurger.smushRight, false);
@@ -182,34 +248,6 @@ describe('Game', () => {
     assert.equal(currentBurger.smushCount, 0);
   });
 
-  it('should set currentBurger.smushLeft to true when the hero is on the right side of the burger', () => {
-    game = new Game(undefined, undefined, keyboarder);
-
-    game.hero.x = 535;
-    game.hero.y = 150;
-
-    let currentBurger = game.findCurrentBurger()[0];
-
-    assert.equal(currentBurger.smushLeft, false);
-    game.squishLeft(currentBurger);
-
-    assert.equal(currentBurger.smushLeft, true);
-  })
-
-  it('should set currentBurger.smushRight to true when the hero is on the right side of the burger', () => {
-    game = new Game(undefined, undefined, keyboarder);
-
-    game.hero.x = 620;
-    game.hero.y = 150;
-
-    let currentBurger = game.findCurrentBurger()[0];
-
-    assert.equal(currentBurger.smushRight, false);
-    game.squishRight(currentBurger);
-
-    assert.equal(currentBurger.smushRight, true);
-  })
-
   it('should be able to create the burgers for Level 1', () => {
     assert.equal(game.burgerLayers[2].x, 535);
     assert.equal(game.burgerLayers[2].y, 110);
@@ -217,7 +255,7 @@ describe('Game', () => {
     assert.equal(game.burgerLayers[4].h, 15);
     assert.equal(game.burgerLayers[1].layer, 'top');
     assert.equal(game.burgerLayers.length, 16);
-  })
+  });
 
   it('should be able to create the ladders for Level 1', () => {
     assert.equal(game.ladders[1].x, 65);
@@ -225,7 +263,7 @@ describe('Game', () => {
     assert.equal(game.ladders[3].w, 30);
     assert.equal(game.ladders[4].h, 100);
     assert.equal(game.ladders.length, 31);
-  })
+  });
 
   it('should be able to create the platforms for Level 1', () => {
     assert.equal(game.platforms[6].x, 265);
@@ -233,7 +271,7 @@ describe('Game', () => {
     assert.equal(game.platforms[2].w, 490);
     assert.equal(game.platforms[8].h, 10);
     assert.equal(game.platforms.length, 10);
-  })
+  });
 
   it('should be able to create the plates for Level 1', () => {
     assert.equal(game.platesOnBottom[1].x, 330);
@@ -241,5 +279,5 @@ describe('Game', () => {
     assert.equal(game.platesOnBottom[2].w, 135);
     assert.equal(game.platesOnBottom[0].h, 5);
     assert.equal(game.platesOnBottom.length, 4);
-  })
+  });
 })
