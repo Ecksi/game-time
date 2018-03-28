@@ -161,24 +161,52 @@ describe('Game', () => {
     game.hero.x = 600;
     game.hero.y = 150;
 
-    let currentBurger = game.findCurrentBurger();
+    let currentBurger = game.findCurrentBurger()[0];
 
-    assert.equal(currentBurger[0].smushLeft, false);
-    assert.equal(currentBurger[0].smushRight, false);
-    assert.equal(currentBurger[0].smushCount, 0);
+    assert.equal(currentBurger.smushLeft, false);
+    assert.equal(currentBurger.smushRight, false);
+    assert.equal(currentBurger.smushCount, 0);
 
-    currentBurger[0].smushLeft = true;
-    currentBurger[0].smushRight = true;
-    currentBurger[0].smushCount = 2;
+    currentBurger.smushLeft = true;
+    currentBurger.smushRight = true;
+    currentBurger.smushCount = 2;
 
-    assert.equal(currentBurger[0].smushLeft, true);
-    assert.equal(currentBurger[0].smushRight, true);
-    assert.equal(currentBurger[0].smushCount, 2);
+    assert.equal(currentBurger.smushLeft, true);
+    assert.equal(currentBurger.smushRight, true);
+    assert.equal(currentBurger.smushCount, 2);
 
-    game.resetSmushCounts(currentBurger[0]);
+    game.resetSmushCounts(currentBurger);
 
-    assert.equal(currentBurger[0].smushLeft, false);
-    assert.equal(currentBurger[0].smushRight, false);
-    assert.equal(currentBurger[0].smushCount, 0);
+    assert.equal(currentBurger.smushLeft, false);
+    assert.equal(currentBurger.smushRight, false);
+    assert.equal(currentBurger.smushCount, 0);
   });
+
+  it('should set currentBurger.smushLeft to true when the hero is on the right side of the burger', () => {
+    game = new Game(undefined, undefined, keyboarder);
+
+    game.hero.x = 535;
+    game.hero.y = 150;
+
+    let currentBurger = game.findCurrentBurger()[0];
+
+    assert.equal(currentBurger.smushLeft, false);
+    game.squishLeft(currentBurger);
+
+    assert.equal(currentBurger.smushLeft, true);
+  })
+
+  it('should set currentBurger.smushRight to true when the hero is on the right side of the burger', () => {
+    game = new Game(undefined, undefined, keyboarder);
+
+    game.hero.x = 620;
+    game.hero.y = 150;
+
+    let currentBurger = game.findCurrentBurger()[0];
+
+    assert.equal(currentBurger.smushRight, false);
+    game.squishRight(currentBurger);
+
+    assert.equal(currentBurger.smushRight, true);
+  })
 })
