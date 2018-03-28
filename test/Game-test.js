@@ -119,6 +119,100 @@ describe('Game', () => {
     assert.equal(game.hero.y, originalHeroYPosition - 2.5)
   });
 
+  it('should disable left and right when on a ladder', () => {
+    game = new Game(undefined, undefined, keyboarder);
+
+    game.hero.x = 355;
+    game.hero.y = 225;
+    game.hero.onLadder = true;
+
+    let currentPlatform = game.platformCollision();
+
+    game.keyboardConditions(currentPlatform);
+
+    assert.equal(game.keyboarder.keyState.up, 'enabled');
+    assert.equal(game.keyboarder.keyState.down, 'enabled');
+    assert.equal(game.keyboarder.keyState.left, 'disabled');
+    assert.equal(game.keyboarder.keyState.right, 'disabled');
+  });
+
+  it('should disable down when on a ladder and platform 8', () => {
+    game = new Game(undefined, undefined, keyboarder);
+
+    game.hero.x = 355;
+    game.hero.y = 525;
+    game.hero.onLadder = true;
+
+    let currentPlatform = game.platformCollision();
+
+    game.keyboardConditions(currentPlatform);
+
+    assert.equal(game.keyboarder.keyState.up, 'enabled');
+    assert.equal(game.keyboarder.keyState.down, 'disabled');
+    assert.equal(game.keyboarder.keyState.left, 'enabled');
+    assert.equal(game.keyboarder.keyState.right, 'enabled');
+  });
+
+  it('should disable up when on a ladder and platform 1', () => {
+    game = new Game(undefined, undefined, keyboarder);
+
+    game.hero.x = 355;
+    game.hero.y = 65;
+    game.hero.onLadder = true;
+
+    let currentPlatform = game.platformCollision();
+
+    game.keyboardConditions(currentPlatform);
+
+    assert.equal(game.keyboarder.keyState.up, 'disabled');
+    assert.equal(game.keyboarder.keyState.down, 'enabled');
+    assert.equal(game.keyboarder.keyState.left, 'enabled');
+    assert.equal(game.keyboarder.keyState.right, 'enabled');
+  });
+
+  it('should enable left and right when on a platform', () => {
+    game = new Game(undefined, undefined, keyboarder);
+
+    game.hero.x = 355;
+    game.hero.y = 65;
+    game.hero.onLadder = true;
+
+    let currentPlatform = game.platformCollision();
+
+    game.keyboardConditions(currentPlatform);
+
+    assert.equal(game.keyboarder.keyState.left, 'enabled');
+    assert.equal(game.keyboarder.keyState.right, 'enabled');
+  });
+
+  it('should disable left when at the left edge of a platform', () => {
+    game = new Game(undefined, undefined, keyboarder);
+
+    game.hero.x = 40;
+    game.hero.y = 65;
+    game.hero.onLadder = true;
+
+    let currentPlatform = game.platformCollision();
+
+    game.keyboardConditions(currentPlatform);
+
+    assert.equal(game.keyboarder.keyState.left, 'disabled');
+  });
+
+  it('should disable right when at the right edge of a platform', () => {
+    game = new Game(undefined, undefined, keyboarder);
+
+    game.hero.x = 950;
+    game.hero.y = 65;
+    game.hero.onLadder = true;
+
+    let currentPlatform = game.platformCollision();
+
+    game.keyboardConditions(currentPlatform);
+
+    assert.equal(game.keyboarder.keyState.right, 'disabled');
+  });
+
   it('should be able to tell what burger the hero is on', () => {
     game.hero.x = 600;
     game.hero.y = 150;
@@ -194,17 +288,21 @@ describe('Game', () => {
     assert(currentBurger.y, 250)
   });
 
-  it('should be able to drop the burger to the next level if not on platform 8', () => {
-    game.hero.x = 355;
+  it.skip('should drop the burger to the next level if not on platform 8', () => {
+    game.hero.x = 750;
     game.hero.y = 65;
 
     let currentPlatform = game.platformCollision();
     let currentBurger = game.findCurrentBurger()[0];
 
+    assert.equal(currentBurger.y, 110);
 
+    game.dropBurger(currentBurger, currentPlatform);
+
+    assert.equal(currentBurger.y, 195)
   });
 
-  it('should be able to drop the burger to the plate if on platform 8', () => {
+  it('should drop the burger to the plate if on platform 8', () => {
     game.hero.x = 750;
     game.hero.y = 370;
 
